@@ -9,7 +9,7 @@ const initialState = fromJS({
 
 function data(state = initialState, action) {
     switch (action.type) {
-        case 'SEARCH_VIDEO': {
+        case 'SEARCH_ENTITIES': {
             // esto devuelve un nuevo mapa de inmutable, no modifica el estado
             return state.set('search', action.payload.query)
         }
