@@ -61,7 +61,7 @@ function mapStateToProps(state, props) {
   // console.log(props.hola)
   return {
     categories: categories,
-    search: state.search
+    search: state.data.search
   }
 }
 
