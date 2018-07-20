@@ -2,9 +2,11 @@ import React from 'react';
 import { hydrate, render } from 'react-dom';
 import Home from '../pages/containers/home';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from '../reducers/index'
 import { Map as map } from 'immutable'
+import logger from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 // function logger({ getState, dispatch}){
 //     // return (metodo para despachar el siguiente middleware) => {
@@ -19,20 +21,24 @@ import { Map as map } from 'immutable'
 //     }
 // }
 
-const logger = ({getState, dispatch }) => next => action => {
+const logger_ = ({getState, dispatch }) => next => action => {
     console.log('este es mi viejo estado', getState().toJS())
     console.log('vamos a enviar está acción', action);
     const value = next(action)
     console.log('este es mi nuevo estado', getState().toJS())
     return value
-  }
+}
   
-
 const store = createStore(
     reducer,
     map(),
-    // convierte el middleware en un enhancer
-    applyMiddleware(logger)
+    composeWithDevTools(
+        // convierte el middleware en un enhancer
+        applyMiddleware(
+            logger,
+            logger_,
+        )
+    )
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
