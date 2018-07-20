@@ -1,4 +1,9 @@
-import { OPEN_MODAL, CLOSE_MODAL, SEARCH_ENTITIES } from '../actions-types/index'
+import { 
+    OPEN_MODAL, 
+    CLOSE_MODAL, 
+    SEARCH_ENTITIES, 
+    SEARCH_ASYNC_ENTITIES 
+} from '../actions-types/index'
 
 
 // una funcion que regresa una acción
@@ -21,5 +26,16 @@ export function searchEntities(query) {
         payload: {
             query
         }
+    }
+}
+export function searchAsyncEntities(query) {
+    return(dispatch) => {
+        // fetch().then(()=>{})
+        // XMLHttpRequest
+        // trae
+        // esperamos 5 segundos para emular una petición asíncrona
+        setTimeout(()=>{
+            dispatch(searchEntities(query))
+        }, 5000)
     }
 }

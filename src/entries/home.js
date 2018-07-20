@@ -8,6 +8,8 @@ import { Map as map } from 'immutable'
 import logger from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+import thunk from 'redux-thunk'
+
 // function logger({ getState, dispatch}){
 //     // return (metodo para despachar el siguiente middleware) => {
 //     return (next) => {
@@ -36,7 +38,7 @@ const store = createStore(
         // convierte el middleware en un enhancer
         applyMiddleware(
             logger,
-            logger_,
+            thunk,
         )
     )
     // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
